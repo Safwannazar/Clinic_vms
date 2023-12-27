@@ -1,5 +1,5 @@
 ####### Register User 
-POST http://localhost:3050/register
+POST http://localhost:3000/register
 Content-Type: application/json
 
 {
@@ -12,7 +12,7 @@ Content-Type: application/json
 }
 
 ######## Login User
-POST http://localhost:3050/login
+POST http://localhost:3000/login
 Content-Type: application/json
 
 {
@@ -21,7 +21,7 @@ Content-Type: application/json
 }
 
 ######## Edit User Profile
-PATCH http://localhost:3050/profile
+PATCH http://localhost:3000/profile
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhZndhbiIsImlhdCI6MTcwMzY4MDc2MX0.EfNrIXWtazmISRZaUynwTgoAFc4X-GjeaS94b0t3c34
 
@@ -33,7 +33,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhZ
 
 
 ######## Create Appointment
-POST http://localhost:3050/create-appointment
+POST http://localhost:3000/create-appointment
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhZndhbiIsImlhdCI6MTcwMzY4MDc2MX0.EfNrIXWtazmISRZaUynwTgoAFc4X-GjeaS94b0t3c34
 
@@ -46,11 +46,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhZ
 }
 
 ######## View Appointment History
-GET http://localhost:3050/appointment-history
+GET http://localhost:3000/appointment-history
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhZndhbiIsImlhdCI6MTcwMzY4MDc2MX0.EfNrIXWtazmISRZaUynwTgoAFc4X-GjeaS94b0t3c34
 
 ######## Admin Login
-POST http://localhost:3050/admin-login
+POST http://localhost:3000/admin-login
 Content-Type: application/json
 
 {
@@ -58,12 +58,12 @@ Content-Type: application/json
 }
 
 ######## Admin View All Data
-GET http://localhost:3050/admin-view-data
+GET http://localhost:3000/admin-view-data
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzAzNjgwODE1fQ.RWCHoM76Sm9vEJsGkbJo7LdzFpkyPtoQ8FSWPJ8hl9E
 
 ######## Admin Update User Data
-PUT http://localhost:3050/admin-update-user/testuser
+PUT http://localhost:3000/admin-update-user/testuser
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzAzNjgwODE1fQ.RWCHoM76Sm9vEJsGkbJo7LdzFpkyPtoQ8FSWPJ8hl9E
 
