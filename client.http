@@ -1,0 +1,73 @@
+####### Register User 
+POST http://localhost:3050/register
+Content-Type: application/json
+
+{
+  "username": "safwan",
+  "password": "safwan",
+  "ICnumber": "9",
+  "name": "wan",
+  "email": "wan.com",
+  "phonenumber": "9"
+}
+
+######## Login User
+POST http://localhost:3050/login
+Content-Type: application/json
+
+{
+  "username": "safwan",
+  "password": "safwan"
+}
+
+######## Edit User Profile
+PATCH http://localhost:3050/profile
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhZndhbiIsImlhdCI6MTcwMzY3Mzg2MH0.xUWgMvx1kwcTHzy09_098t_S8DVnbwzQfXq4jealjBQ
+
+{
+  "name": "amri ",
+  "email": "updated@gmail.com",
+  "phonenumber": "0194327870"
+}
+
+
+######## Create Appointment
+POST http://localhost:3050/create-appointment
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhZndhbiIsImlhdCI6MTcwMzY3Mzg2MH0.xUWgMvx1kwcTHzy09_098t_S8DVnbwzQfXq4jealjBQ
+
+{
+  "name": " amri",
+  "phoneNumber": "10",
+  "appointmentDate": "31",
+  "time": "10:00 AM",
+  "purpose": "makn2"
+}
+
+######## View Appointment History
+GET http://localhost:3050/appointment-history
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhZndhbiIsImlhdCI6MTcwMzY3Mzg2MH0.xUWgMvx1kwcTHzy09_098t_S8DVnbwzQfXq4jealjBQ
+
+######## Admin Login
+POST http://localhost:3050/admin-login
+Content-Type: application/json
+
+{
+  "privateKey": "123"
+}
+
+######## Admin View All Data
+GET http://localhost:3050/admin-view-data
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzAzNjczOTM0fQ.Kj3zHUgh3bs9XpSzLiGIesXlzBiADN_ixbG10b3yfrw
+
+######## Admin Update User Data
+PUT http://localhost:3050/admin-update-user/testuser
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzAzNjczOTM0fQ.Kj3zHUgh3bs9XpSzLiGIesXlzBiADN_ixbG10b3yfrw
+
+{
+  "name": "Updated Admin User"
+  
+}
