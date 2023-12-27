@@ -4,8 +4,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const app = express()
 const cors = require('cors');
-//const port = process.env.PORT || 3050;
-const port = 3050
+const port = process.env.PORT || 3050;
+//const port = 3050
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
