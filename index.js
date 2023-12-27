@@ -1,10 +1,11 @@
-const express = require('express');
+const express = require('express')
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const app = express();
+const app = express()
 const cors = require('cors');
-const port = process.env.PORT || 3000;
+//const port = process.env.PORT || 3050;
+const port = 3050
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
@@ -32,14 +33,13 @@ const options = {
     info: {
       title: 'ClinicVMS API',
       version: '1.0.0',
-      description: 'API for ClinicVMS',
     },
   },
   // Path to the API documentation
-  apis: ['./index.js'],
+  apis: ['./swagger.js'],
 };
 const swaggerSpec = swaggerJsdoc(options);
-app.use('api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 
 // Connect to MongoDB
