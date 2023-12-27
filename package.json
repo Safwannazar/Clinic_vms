@@ -1,7 +1,7 @@
 {
   "name": "clinic_vms",
   "version": "1.0.0",
-  "description": "",
+  "description": "clinic",
   "main": "clinic.js",
   "scripts": {
     "start": "node index.js"
@@ -18,7 +18,10 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.3.0",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.0"
+    "swagger-ui-express": "^5.0.0",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {}
 }
+
+

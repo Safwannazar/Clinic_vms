@@ -91,6 +91,7 @@ paths:
           description: Unauthorized - Invalid credentials
         '500':
           description: Internal Server Error - Error logging in
+
   /profile:
     patch:
       summary: Update User Profile
@@ -103,7 +104,7 @@ paths:
           schema:
             type: string
           required: true
-          description: User's JWT token
+          description: User token
       requestBody:
         required: true
         content:

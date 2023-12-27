@@ -7,6 +7,8 @@ const cors = require('cors');
 const port = process.env.PORT || 3050;
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('swagger.yaml');
 
 const uri = "mongodb+srv://safwannazar:WEu5Q9SjSKXWb73A@clinicvms.vhqe7g1.mongodb.net/?retryWrites=true&w=majority";
 const dbName = "ClinicVMS";
@@ -38,7 +40,8 @@ const options = {
   apis: ['./index.js'],
 };
 const swaggerSpec = swaggerJsdoc(options);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/group19', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Connect to MongoDB
 async function connectToMongoDB() {
