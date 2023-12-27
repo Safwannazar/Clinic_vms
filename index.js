@@ -35,10 +35,10 @@ const options = {
     },
   },
   // Path to the API documentation
-  apis: ['C:\Users\MR Genesis\Desktop\ClinicVMS\swaggerAPI.yaml'],
+  apis: ['./index.js'],
 };
 const swaggerSpec = swaggerJsdoc(options);
-app.use('/Group19', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Connect to MongoDB
 async function connectToMongoDB() {
