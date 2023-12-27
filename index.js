@@ -41,7 +41,7 @@ const options = {
 };
 const swaggerSpec = swaggerJsdoc(options);
 app.use('/group19', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 
 // Connect to MongoDB
 async function connectToMongoDB() {
