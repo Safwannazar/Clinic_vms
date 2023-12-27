@@ -91,17 +91,13 @@
  * @swagger
  * /profile:
  *   patch:
- *     summary: Update User Profile
+ *     summary: Update user profile
  *     description: Update the user profile for the authenticated user.
  *     tags:
  *       - User
- *     parameters:
- *       - in: header
- *         name: Authorization
- *         schema:
- *           type: string
- *         required: true
- *         description: User's JWT token
+ *     security:
+ *       - bearerAuth: []
+ *         bearerformat: JWT
  *     requestBody:
  *       required: true
  *       content:

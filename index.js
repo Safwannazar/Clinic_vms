@@ -10,7 +10,7 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
 
-const uri = "mongodb+srv://safwannazar:WEu5Q9SjSKXWb73A@clinicvms.vhqe7g1.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://safwannazar:33S7L1KP91jTek0x@clinicvms.vhqe7g1.mongodb.net/";
 const dbName = "ClinicVMS";
 const usersCollectionDB = "users";
 const appointmentCollectionDB = "appointments";
