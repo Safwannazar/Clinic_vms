@@ -44,8 +44,8 @@
  *                   type: string
  *                   description: Registration success message
  *       '500':
- *         description: Internal Server Error - Error registering user
- *         schema:
+ *          description: Error registering user
+ *        
  *          
  */
 
