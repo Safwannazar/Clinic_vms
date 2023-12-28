@@ -46,7 +46,7 @@
  *       '500':
  *         description: Internal Server Error - Error registering user
  *         schema:
- *           $ref: '#/definitions/Error'
+ *          
  */
 
 /**
