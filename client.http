@@ -1,73 +1,87 @@
-####### Register User 
+### Register a new user
 POST http://localhost:3050/register
 Content-Type: application/json
 
 {
-  "username": "safwan",
-  "password": "safwan",
-  "ICnumber": "9",
-  "name": "wan",
-  "email": "wan.com",
-  "phonenumber": "9"
+  "username": "testUser",
+  "password": "testPassword",
+  "ICnumber": "123456789012",
+  "name": "Test User",
+  "email": "testuser@example.com",
+  "phonenumber": "987654321"
 }
 
-######## Login User
+###Login with the registered user
 POST http://localhost:3050/login
 Content-Type: application/json
 
 {
-  "username": "safwan",
-  "password": "safwan"
+  "username": "testUser",
+  "password": "newPassword"
 }
 
-######## Edit User Profile
+### Update user profile (replace <userToken> with the actual token obtained from the login response)
 PATCH http://localhost:3050/profile
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhZndhbiIsImlhdCI6MTcwMzY4MDc2MX0.EfNrIXWtazmISRZaUynwTgoAFc4X-GjeaS94b0t3c34
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RVc2VyIiwiaWF0IjoxNzA0NzEwNzk5LCJleHAiOjE3MDQ3MTQzOTl9.Xb75lxhST8srfI2IfP6J4LAAdnxPwTA8ugzLsy2JSEw
 
 {
-  "name": "amri ",
-  "email": "updated@gmail.com",
-  "phonenumber": "0194327870"
+  "name": "Updated Test User",
+  "email": "updateduser@example.com",
+  "phonenumber": "1234567890",
+  "password": "newPassword",
+  "ICnumber": "9876543210"
 }
 
-
-######## Create Appointment
+### Create Appointment
 POST http://localhost:3050/create-appointment
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhZndhbiIsImlhdCI6MTcwMzY4MDc2MX0.EfNrIXWtazmISRZaUynwTgoAFc4X-GjeaS94b0t3c34
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RVc2VyIiwiaWF0IjoxNzA0NzEwNzk5LCJleHAiOjE3MDQ3MTQzOTl9.Xb75lxhST8srfI2IfP6J4LAAdnxPwTA8ugzLsy2JSEw
 
 {
-  "name": " amri",
-  "phoneNumber": "10",
-  "appointmentDate": "31",
+  "name": "Appointment Name",
+  "phonenumber": "+9876543210",
+  "appointmentDate": "2024-01-15",
   "time": "10:00 AM",
-  "purpose": "makn2"
+  "purpose": "Regular checkup"
 }
 
-######## View Appointment History
+### View Appointment History
 GET http://localhost:3050/appointment-history
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhZndhbiIsImlhdCI6MTcwMzY4MDc2MX0.EfNrIXWtazmISRZaUynwTgoAFc4X-GjeaS94b0t3c34
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RVc2VyIiwiaWF0IjoxNzA0NzEwNzk5LCJleHAiOjE3MDQ3MTQzOTl9.Xb75lxhST8srfI2IfP6J4LAAdnxPwTA8ugzLsy2JSEw
 
-######## Admin Login
+##### Admin Login - Get Admin Token
 POST http://localhost:3050/admin-login
 Content-Type: application/json
 
 {
-  "privateKey": "123"
+  "privateKey": "wanWAN1234!@#$"
 }
 
-######## Admin View All Data
+##### Admin View All Data (User and Appointments)
 GET http://localhost:3050/admin-view-data
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzAzNjgwODE1fQ.RWCHoM76Sm9vEJsGkbJo7LdzFpkyPtoQ8FSWPJ8hl9E
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzA0NzEyNzU5LCJleHAiOjE3MDQ3MTYzNTl9.Qf_9t8r7m59wHAt-BTxvOETU7F2lXDy0sK2X-VnB1e4
 
-######## Admin Update User Data
-PUT http://localhost:3050/admin-update-user/testuser
+##### Admin Edit User Data (Replace USERNAME with the actual username)
+PATCH http://localhost:3050/admin-edit-user/USERNAME
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzA0NzEyNzU5LCJleHAiOjE3MDQ3MTYzNTl9.Qf_9t8r7m59wHAt-BTxvOETU7F2lXDy0sK2X-VnB1e4
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzAzNjgwODE1fQ.RWCHoM76Sm9vEJsGkbJo7LdzFpkyPtoQ8FSWPJ8hl9E
 
 {
-  "name": "Updated Admin User"
-  
+  "name": "Updated Name",
+  "email": "updated@email.com",
+  "phonenumber": "9876543210",
+  "password": "newpassword",
+  "ICnumber": "123456789012"
 }
+
+
+
+
+
+
+
+
+
+
+

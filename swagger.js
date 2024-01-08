@@ -1,11 +1,32 @@
 /**
  * @swagger
+ * components:
+ *   securitySchemes:
+ *     BearerUserAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ *     BearerAdminAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ */
+
+/**
+ * @swagger
+ * tags:
+ *   - name: User
+ *     description: User endpoints
+ *   - name: Admin
+ *     description: Admin endpoints
+ */
+
+/**
+ * @swagger
  * /register:
  *   post:
+ *     tags: [User]
  *     summary: Register a new user
- *     description: Register a new user with the provided information.
- *     tags:
- *       - User
  *     requestBody:
  *       required: true
  *       content:
@@ -15,48 +36,31 @@
  *             properties:
  *               username:
  *                 type: string
- *                 description: User's username
  *               password:
  *                 type: string
- *                 description: User's password
  *               ICnumber:
  *                 type: string
- *                 description: User's IC number
  *               name:
  *                 type: string
- *                 description: User's name
  *               email:
  *                 type: string
- *                 format: email
- *                 description: User's email
  *               phonenumber:
  *                 type: string
- *                 description: User's phone number
  *     responses:
  *       '201':
- *         description: User registered successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Registration success message
+ *         description: Registration successful
+ *       '400':
+ *         description: Bad request or user already registered
  *       '500':
- *         description: Internal Server Error - Error registering user
- *         schema:
- *           $ref: '#/definitions/Error'
+ *         description: Internal server error
  */
 
 /**
  * @swagger
  * /login:
  *   post:
- *     summary: User Login
- *     description: Authenticate and log in a user with the provided credentials.
- *     tags:
- *       - User
+ *     tags: [User]
+ *     summary: Login a user
  *     requestBody:
  *       required: true
  *       content:
@@ -66,38 +70,32 @@
  *             properties:
  *               username:
  *                 type: string
- *                 description: User's username
  *               password:
  *                 type: string
- *                 description: User's password
  *     responses:
  *       '200':
- *         description: User login successful
+ *         description: Login successful
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 token:
+ *                 userToken:
  *                   type: string
- *                   description: Authentication token for the user
  *       '401':
- *         description: Unauthorized - Invalid credentials
+ *         description: Invalid credentials
  *       '500':
- *         description: Internal Server Error - Error logging in
+ *         description: Internal server error
  */
 
 /**
  * @swagger
  * /profile:
  *   patch:
+ *     tags: [User]
  *     summary: Update user profile
- *     description: Update the user profile for the authenticated user.
- *     tags:
- *       - User
  *     security:
- *       - bearerAuth: []
- *         bearerformat: JWT
+ *       - BearerUserAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -107,252 +105,147 @@
  *             properties:
  *               name:
  *                 type: string
- *                 description: Updated name for the user profile
- *               password:
- *                 type: string
- *                 description: Updated password for the user profile
- *               ICnumber:
- *                 type: string
- *                 description: Updated IC number for the user profile
  *               email:
  *                 type: string
- *                 format: email
- *                 description: Updated email for the user profile
  *               phonenumber:
  *                 type: string
- *                 description: Updated phone number for the user profile
+ *               password:
+ *                 type: string
+ *               ICnumber:
+ *                 type: string
  *     responses:
  *       '200':
  *         description: User profile updated successfully
- *       '400':
- *         description: Bad Request - No fields to update
- *       '403':
- *         description: Forbidden - Invalid or expired token
+ *       '401':
+ *         description: Unauthorized (invalid or missing token)
  *       '500':
- *         description: Internal Server Error - Error updating user profile
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Error message
+ *         description: Internal server error
  */
-
 /**
  * @swagger
- * /create-appointment:
- *   post:
- *     summary: Create a new appointment
- *     description: Create a new appointment with the provided information.
- *     tags:
- *       - User
- *     parameters:
- *       - in: header
- *         name: Authorization
- *         schema:
- *           type: string
+ * paths:
+ *   /create-appointment:
+ *     post:
+ *       tags: [User]
+ *       summary: Create a new appointment
+ *       security:
+ *         - BearerUserAuth: []
+ *       requestBody:
  *         required: true
- *         description: User's JWT token
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *                 description: Name for the appointment
- *               phoneNumber:
- *                 type: string
- *                 description: Phone number for the appointment
- *               appointmentDate:
- *                 type: string
- *                 format: date
- *                 description: Date for the appointment
- *               time:
- *                 type: string
- *                 description: Time for the appointment
- *               purpose:
- *                 type: string
- *                 description: Purpose of the appointment
- *     responses:
- *       '201':
- *         description: Appointment created successfully
- *       '500':
- *         description: Error creating appointment
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 message:
+ *                 name:
  *                   type: string
- *                   description: Error message
+ *                   description: Name of the person making the appointment
+ *                 phonenumber:
+ *                   type: string
+ *                   description: Phone number of the person making the appointment
+ *                 appointmentDate:
+ *                   type: string
+ *                   format: date-time
+ *                   description: Date of the appointment in ISO 8601 format
+ *                 time:
+ *                   type: string
+ *                   description: Time of the appointment
+ *                 purpose:
+ *                   type: string
+ *                   description: Purpose or reason for the appointment
+ *       responses:
+ *         201:
+ *           description: Appointment created successfully
+ *         401:
+ *           description: Unauthorized - Invalid or missing token
+ *         500:
+ *           description: Internal Server Error
  */
-
 /**
  * @swagger
  * /appointment-history:
  *   get:
- *     summary: Get appointment history for the logged-in user
- *     description: Retrieve the appointment history for the authenticated user.
- *     tags:
- *       - User
- *     parameters:
- *       - in: header
- *         name: Authorization
- *         schema:
- *           type: string
- *         required: true
- *         description: User's JWT token
+ *     tags: [User]
+ *     summary: Get user's appointment history
+ *     security:
+ *       - BearerUserAuth: []
  *     responses:
- *       '200':
+ *       200:
  *         description: Successful operation
  *         content:
  *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   username:
- *                     type: string
- *                     description: Username of the appointment owner
- *                   name:
- *                     type: string
- *                     description: Name for the appointment
- *                   phoneNumber:
- *                     type: string
- *                     description: Phone number for the appointment
- *                   appointmentDate:
- *                     type: string
- *                     format: date
- *                     description: Date for the appointment
- *                   time:
- *                     type: string
- *                     description: Time for the appointment
- *                   purpose:
- *                     type: string
- *                     description: Purpose of the appointment
- *       '500':
- *         description: Error fetching appointment history
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Error message
+ *             example:
+ *               - name: "John Doe"
+ *                 phonenumber: "+1234567890"
+ *                 appointmentDate: "2024-01-10T10:00:00Z"
+ *                 time: "Morning"
+ *                 purpose: "Regular Checkup"
+ *               - name: "Jane Doe"
+ *                 phonenumber: "+9876543210"
+ *                 appointmentDate: "2024-01-15T14:30:00Z"
+ *                 time: "Afternoon"
+ *                 purpose: "Follow-up"
+ *       401:
+ *         description: Unauthorized - Invalid or expired token
+ *       500:
+ *         description: Internal Server Error
  */
-
 /**
  * @swagger
  * /admin-login:
  *   post:
- *     summary: Log in as an admin and get an admin token
- *     description: Authenticate as an admin using a private key and obtain an admin token.
- *     tags:
- *       - Admin
+ *     tags: [Admin]
+ *     summary: Admin login using private key
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               privateKey:
- *                 type: string
- *                 description: Private key for admin authentication
+ *           example:
+ *             privateKey: "admin_private_key"
  *     responses:
- *       '200':
- *         description: Admin logged in successfully
+ *       200:
+ *         description: Admin login successful
  *         content:
  *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 token:
- *                   type: string
- *                   description: Authentication token for the admin
- *                 message:
- *                   type: string
- *                   description: Success message
- *       '401':
- *         description: Unauthorized
- *       '500':
- *         description: Error logging in as admin
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Error message
+ *             example:
+ *               token: "admin_jwt_token"
+ *               message: "Admin login successful"
+ *       401:
+ *         description: Unauthorized - Invalid private key
+ *       500:
+ *         description: Internal Server Error
  */
-
 /**
  * @swagger
  * /admin-view-data:
  *   get:
- *     tags:
- *       - Admin
- *     summary: View all data for admin users
- *     parameters:
- *       - in: header
- *         name: Authorization
- *         schema:
- *           type: string
- *         required: true
- *         description: Admin's JWT token
+ *     summary: Get all user and appointment data (Admin only)
+ *     tags: [Admin]
+ *     security:
+ *       - BearerAdminAuth: []
  *     responses:
- *       '200':
- *         description: Successful operation
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 users:
- *                   type: array
- *                   items:
- *                     type: object
- *                     # Define properties for user data
- *                 appointments:
- *                   type: array
- *                   items:
- *                     type: object
- *                     # Define properties for appointment data
- *       '403':
- *         description: Forbidden
- *       '500':
- *         description: Error fetching admin data
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Error message
+ *       200:
+ *         description: Successful response with user and appointment data
+ *       401:
+ *         description: Unauthorized. Admin token not provided.
+ *       403:
+ *         description: Forbidden. Provided token is not an admin token.
+ *       500:
+ *         description: Internal Server Error
  */
-
 /**
  * @swagger
- * /admin-update-user/{username}:
- *   put:
- *     tags:
- *       - Admin
- *     summary: Update user data as an admin
+ * /admin-edit-user/USERNAME:
+ *   patch:
+ *     summary: Edit user data (Admin only)
+ *     tags: [Admin]
+ *     security:
+ *       - BearerAdminAuth: []
  *     parameters:
- *       - name: username
- *         in: path
+ *       - in: path
+ *         name: username
  *         required: true
- *         description: Username of the user to update
+ *         description: Username of the user to be edited
  *         schema:
  *           type: string
  *     requestBody:
@@ -369,26 +262,12 @@
  *               phonenumber:
  *                 type: string
  *     responses:
- *       '200':
- *         description: User data updated successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Success message
- *       '403':
- *         description: Forbidden
- *       '500':
- *         description: Error updating user data
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Error message
+ *       200:
+ *         description: Successful response with updated user data
+ *       401:
+ *         description: Unauthorized. Admin token not provided.
+ *       403:
+ *         description: Forbidden. Provided token is not an admin token.
+ *       500:
+ *         description: Internal Server Error
  */
