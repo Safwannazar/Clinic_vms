@@ -52,7 +52,9 @@
  *       '400':
  *         description: Bad request or user already registered
  *       '500':
- *         description: Internal server error
+ *         description: Internal Server Error - Error registering user
+ *         schema:
+ *           $ref: '#/definitions/Error'
  */
 
 /**
