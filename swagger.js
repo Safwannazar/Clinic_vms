@@ -53,8 +53,6 @@
  *         description: Bad request or user already registered
  *       '500':
  *         description: Internal Server Error - Error registering user
- *         schema:
- *           $ref: '#/definitions/Error'
  */
 
 /**
@@ -190,6 +188,29 @@
  *       401:
  *         description: Unauthorized - Invalid or expired token
  *       500:
+ *         description: Internal Server Error
+ */
+/**
+ * @swagger
+ * /delete-appointment/{appointmentDate}:
+ *   delete:
+ *     tags: [User]
+ *     summary: Delete user's appointment by date
+ *     security:
+ *       - BearerUserAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: appointmentDate
+ *         required: true
+ *         description: Date of the appointment to be deleted 
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Appointment deleted successfully
+ *       '404':
+ *         description: Appointment not found
+ *       '500':
  *         description: Internal Server Error
  */
 /**

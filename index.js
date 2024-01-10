@@ -27,7 +27,7 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(session({
-  secret: 'TESTSECRET',
+  secret: 'Pfb@P3n@Ng123!@#',
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -91,7 +91,7 @@ function generateToken(user) {
 
   const token = jwt.sign(
     payload,
-    'TESTSECRET', // Replace with your secret key
+    'Pfb@P3n@Ng123!@#', // Replace with your secret key
     { expiresIn: '1h' }
   );
 
@@ -180,7 +180,7 @@ app.patch('/profile', async (req, res) => {
     const userToken = req.headers.authorization.split(' ')[1];
     
     // Verify the user token
-    const decodedUser = jwt.verify(userToken, 'TESTSECRET'); // Replace with your secret key
+    const decodedUser = jwt.verify(userToken, 'Pfb@P3n@Ng123!@#'); // Replace with your secret key
 
     // Access user data from the decoded token
     const loggedInUsername = decodedUser.username;
@@ -221,7 +221,7 @@ app.post('/create-appointment', appointmentValidation, async (req, res) => {
     const userToken = req.headers.authorization.split(' ')[1];
 
     // Verify the user token
-    const decodedUser = jwt.verify(userToken, 'TESTSECRET'); // Replace with your secret key
+    const decodedUser = jwt.verify(userToken, 'Pfb@P3n@Ng123!@#'); // Replace with your secret key
 
     // Access user data from the decoded token
     const username = decodedUser.username;
@@ -255,7 +255,7 @@ app.get('/appointment-history', async (req, res) => {
     const userToken = req.headers.authorization.split(' ')[1];
 
     // Verify the user token
-    const decodedUser = jwt.verify(userToken, 'TESTSECRET'); // Replace with your secret key
+    const decodedUser = jwt.verify(userToken, 'Pfb@P3n@Ng123!@#'); // Replace with your secret key
 
     // Access user data from the decoded token
     const username = decodedUser.username;
@@ -274,6 +274,37 @@ app.get('/appointment-history', async (req, res) => {
   }
 });
 
+// Delete appointment by date
+app.delete('/delete-appointment/:appointmentDate', async (req, res) => {
+  try {
+    // Extract the user token from the request header
+    const userToken = req.headers.authorization.split(' ')[1];
+
+    // Verify the user token
+    const decodedUser = jwt.verify(userToken, 'Pfb@P3n@Ng123!@#'); // Replace with your secret key
+
+    // Access user data from the decoded token
+    const username = decodedUser.username;
+
+    // Extract the appointment date from the request parameters
+    const appointmentDate = req.params.appointmentDate;
+
+    // Delete the appointment for the user on the specified date
+    const result = await client
+      .db(dbName)
+      .collection(appointmentCollectionDB)
+      .deleteOne({ username, appointmentDate });
+
+    if (result.deletedCount === 1) {
+      res.status(200).send('Appointment deleted successfully');
+    } else {
+      res.status(404).send('Appointment not found');
+    }
+  } catch (error) {
+    console.error('Error deleting appointment:', error);
+    res.status(500).send('Error deleting appointment');
+  }
+});
 
 
 // Function to generate a JWT token for an admin
@@ -284,7 +315,7 @@ function generateTokenAdmin() {
 
   const token = jwt.sign(
     payload,
-    '@dm!nk3y', // Replace with your admin secret key
+    '@dm!nk3y123!@#', // Replace with your admin secret key
     { expiresIn: '1h' }
   );
 
@@ -326,7 +357,7 @@ async function verifyAdminToken(req, res, next) {
       return res.status(401).send('Unauthorized');
     }
 
-    const decodedAdmin = jwt.verify(adminToken.split(' ')[1], '@dm!nk3y');
+    const decodedAdmin = jwt.verify(adminToken.split(' ')[1], '@dm!nk3y123!@#');
 
     if (decodedAdmin.username !== 'admin') {
       console.error('User is not an admin');
@@ -375,17 +406,22 @@ app.patch('/admin-edit-user/:username', verifyAdminToken, async (req, res) => {
 
     const updateFields = {};
 
-    // You can update all fields without checking if they are provided
-    updateFields.name = name;
-    updateFields.email = email;
-    updateFields.phonenumber = phonenumber;
-
-    // Hash the password using bcrypt if provided
+    // Check if each field is provided and update only those fields
+    if (name) {
+      updateFields.name = name;
+    }
+    if (email) {
+      updateFields.email = email;
+    }
+    if (phonenumber) {
+      updateFields.phonenumber = phonenumber;
+    }
     if (password) {
       updateFields.password = await bcrypt.hash(password, 10);
     }
-
-    updateFields.ICnumber = ICnumber;
+    if (ICnumber) {
+      updateFields.ICnumber = ICnumber;
+    }
 
     // Update the user data in MongoDB
     await client
@@ -399,6 +435,7 @@ app.patch('/admin-edit-user/:username', verifyAdminToken, async (req, res) => {
     res.status(500).send('Error updating user data by admin');
   }
 });
+
 
 
 
