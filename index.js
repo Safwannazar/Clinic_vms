@@ -186,18 +186,22 @@ app.patch('/profile', async (req, res) => {
     const loggedInUsername = decodedUser.username;
     const updateFields = {};
 
-    // You can update all fields without checking if they are provided
-    updateFields.name = name;
-    updateFields.email = email;
-    updateFields.phonenumber = phonenumber;
-
-    // Hash the password using bcrypt if provided
+    // Check if each field is provided and update only those fields
+    if (name) {
+      updateFields.name = name;
+    }
+    if (email) {
+      updateFields.email = email;
+    }
+    if (phonenumber) {
+      updateFields.phonenumber = phonenumber;
+    }
     if (password) {
       updateFields.password = await bcrypt.hash(password, 10);
     }
-
-    updateFields.ICnumber = ICnumber;
-
+    if (ICnumber) {
+      updateFields.ICnumber = ICnumber;
+    }
     // Ensure that the user can only update their own data
     await client
       .db(dbName)
