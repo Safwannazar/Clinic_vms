@@ -70,8 +70,8 @@ GET http://localhost:3050/admin-view-data
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzA0NzEyNzU5LCJleHAiOjE3MDQ3MTYzNTl9.Qf_9t8r7m59wHAt-BTxvOETU7F2lXDy0sK2X-VnB1e4
 
 ##### Admin Edit User Data (Replace USERNAME with the actual username)
-PATCH http://localhost:3050/admin-edit-user/safwannazarr
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzA0ODE1NjY5LCJleHAiOjE3MDQ4MTkyNjl9.y4So_BEblZSdKNudUZig6jNGC0-Wu6JWW4bH6WoRYQQ
+PATCH http://localhost:3050/admin-edit-user/wanieeee
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzA1MTcyMzI1LCJleHAiOjE3MDUxNzU5MjV9.8PrD6aKkdkuoSRU_oJTbc2olCP4FQXs4nKQKp69MOjU
 Content-Type: application/json
 
 {

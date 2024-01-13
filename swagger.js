@@ -258,9 +258,9 @@
  */
 /**
  * @swagger
- * /admin-edit-user/USERNAME:
+ * /admin-edit-user/{username}:
  *   patch:
- *     summary: Edit user data (Admin only)
+ *     summary: Edit user data by admin
  *     tags: [Admin]
  *     security:
  *       - BearerAdminAuth: []
@@ -280,17 +280,27 @@
  *             properties:
  *               name:
  *                 type: string
+ *                 description: New name of the user
  *               email:
  *                 type: string
+ *                 description: New email of the user
  *               phonenumber:
  *                 type: string
+ *                 description: New phone number of the user
+ *               password:
+ *                 type: string
+ *                 description: New password of the user
+ *               ICnumber:
+ *                 type: string
+ *                 description: New IC number of the user
  *     responses:
- *       200:
+ *       '200':
  *         description: Successful response with updated user data
- *       401:
+ *       '401':
  *         description: Unauthorized. Admin token not provided.
- *       403:
+ *       '403':
  *         description: Forbidden. Provided token is not an admin token.
- *       500:
+ *       '500':
  *         description: Internal Server Error
  */
+
