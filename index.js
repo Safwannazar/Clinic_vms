@@ -92,7 +92,7 @@ function generateToken(user) {
   const token = jwt.sign(
     payload,
     'Pfb@P3n@Ng123!@#', // Replace with your secret key
-    { expiresIn: '1h' }
+    { expiresIn: '1h', algorithm: 'HS256' }
   );
 
   return token;
